@@ -161,7 +161,7 @@ Ext.define('CustomApp', {
                             var attachmentObjectID = attachment.get('ObjectID');
                             var attachmentName = attachment.get('Name');
                             attachmentsHtml.push('<a href="https://rally1.rallydev.com/slm/attachment/' + attachmentObjectID + "/" + attachmentName + '">' + attachmentName + '</a>');                        });
-                        return attachmentsHtml.join(', ');
+                        return attachmentsHtml.join('<br/> ');
                     },
                     flex: 1
                 }
