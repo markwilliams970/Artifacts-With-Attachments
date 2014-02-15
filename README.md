@@ -1,8 +1,10 @@
-Artifacts-With-Attachments
+Rally Artifacts With Attachments
 =========================
 
 ## Overview
+This app provides a table showing Rally Artifacts (Stories, Defects, Test Cases, or Tasks) that have attachments, including a list of links to their attachments.
 
+![Artifacts-With-Attachments](https://raw2.github.com/markwilliams970/Artifacts-With-Attachments/master/img/screenshot.png)
 
 ## License
 
