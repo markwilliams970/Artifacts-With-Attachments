@@ -3,7 +3,7 @@
 <head>
     <title>Rally Artifacts With Attachments</title>
 
-    <script type="text/javascript" src="https://rally1.rallydev.com/apps/2.0rc2/sdk.js"></script>
+    <script type="text/javascript" src="/apps/2.0rc2/sdk.js"></script>
 
     <script type="text/javascript">
         Rally.onReady(function () {
@@ -66,6 +66,7 @@
             model: selectedArtifactType,
             fetch: ['ObjectID', 'FormattedID', 'Name', 'Attachments'],
             autoLoad: true,
+            limit: 4000,
             context: {
                 projectScopeUp: false,
                 projectScopeDown: false
@@ -73,6 +74,11 @@
             listeners: {
                 scope: this,
                 load: this._artifactStoreLoaded
+            },
+            filters: {
+                property: 'Attachments.ObjectID',
+                operator: '!=',
+                value: "null"
             }
         });
     },
@@ -184,7 +190,7 @@
 
             Rally.launchApp('CustomApp', {
                 name:"Rally Artifacts With Attachments",
-                parentRepos:""
+	            parentRepos:""
             });
 
         });

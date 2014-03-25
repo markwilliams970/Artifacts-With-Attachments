@@ -57,6 +57,7 @@ Ext.define('CustomApp', {
             model: selectedArtifactType,
             fetch: ['ObjectID', 'FormattedID', 'Name', 'Attachments'],
             autoLoad: true,
+            limit: 4000,
             context: {
                 projectScopeUp: false,
                 projectScopeDown: false
@@ -64,6 +65,11 @@ Ext.define('CustomApp', {
             listeners: {
                 scope: this,
                 load: this._artifactStoreLoaded
+            },
+            filters: {
+                property: 'Attachments.ObjectID',
+                operator: '!=',
+                value: "null"
             }
         });
     },
