@@ -26,10 +26,11 @@ Ext.define('CustomApp', {
         var artifactTypesStore = Ext.create('Ext.data.Store', {
             fields: ['name', 'type'],
             data: [
-                {"name": "User Story", "type": "HierarchicalRequirement"},
-                {"name": "Defect",     "type": "Defect"},
-                {"name": "Test Case",  "type": "TestCase"},
-                {"name": "Task",       "type": "Task"}
+                {"name": "Portfolio Item", "type": "PortfolioItem"},
+                {"name": "User Story",     "type": "HierarchicalRequirement"},
+                {"name": "Defect",         "type": "Defect"},
+                {"name": "Test Case",      "type": "TestCase"},
+                {"name": "Task",           "type": "Task"}
             ]
         });
 
@@ -83,21 +84,23 @@ Ext.define('CustomApp', {
         var artifactRecords = [];
         var promises = [];
 
-        Ext.Array.each(records, function(artifact) {
-            promises.push(me._getArtifactAttachments(artifact, me));
-        });
+        if (records.length === 0) {
+            me._noArtifactsNotify();
+        } else {
 
-        Deft.Promise.all(promises).then({
-            success: function(results) {
-                Ext.Array.each(results, function(result) {
-                    if (result.Attachments.length > 0) {
+            Ext.Array.each(records, function(artifact) {
+                promises.push(me._getArtifactAttachments(artifact, me));
+            });
+
+            Deft.Promise.all(promises).then({
+                success: function(results) {
+                    Ext.Array.each(results, function(result) {
                         me._artifactsWithAttachments.push(result);
-                    }
-                });
-                me._makeGrid();
-            }
-        });
-
+                    });
+                    me._makeGrid();
+                }
+            });
+        }
     },
 
     _getArtifactAttachments: function(artifact, scope) {
@@ -141,6 +144,7 @@ Ext.define('CustomApp', {
             me._artifactAttachmentGrid.destroy();
         }
 
+
         var gridStore = Ext.create('Rally.data.custom.Store', {
             data: me._artifactsWithAttachments,
             pageSize: 1000,
@@ -176,5 +180,13 @@ Ext.define('CustomApp', {
 
         me.down('#gridContainer').add(me._artifactAttachmentGrid);
         me._artifactsWithAttachments.reconfigure(gridStore);
+
+    },
+
+    _noArtifactsNotify: function() {
+        this._artifactAttachmentGrid = this.down('#gridContainer').add({
+            xtype: 'container',
+            html: "No attachments found on Artifacts of selected Type."
+        });
     }
 });
