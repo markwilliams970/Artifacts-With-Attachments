@@ -184,6 +184,11 @@ Ext.define('CustomApp', {
     },
 
     _noArtifactsNotify: function() {
+
+        if (this._artifactAttachmentGrid) {
+            this._artifactAttachmentGrid.destroy();
+        }
+
         this._artifactAttachmentGrid = this.down('#gridContainer').add({
             xtype: 'container',
             html: "No attachments found on Artifacts of selected Type."
