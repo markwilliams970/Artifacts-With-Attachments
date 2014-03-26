@@ -108,26 +108,30 @@ Ext.define('CustomApp', {
         var me = scope;
 
         var attachments = [];
+        var attachmentUsers = [];
         var resultHash = {};
 
         var artifactRef = artifact.get('_ref');
         var artifactObjectID = artifact.get('ObjectID');
         var artifactFormattedID = artifact.get('FormattedID');
         var artifactName = artifact.get('Name');
-        var attachmentCollection = artifact.getCollection("Attachments", {fetch: ['Name', 'ObjectID']});
+        var attachmentCollection = artifact.getCollection("Attachments", {fetch: ['Name', 'ObjectID', 'User']});
         var attachmentCount = attachmentCollection.getCount();
 
         attachmentCollection.load({
             callback: function(records, operation, success) {
                 Ext.Array.each(records, function(attachment) {
                     attachments.push(attachment);
+                    var attachmentUser = attachment.get('User');
+                    attachmentUsers.push(attachmentUser);
                 });
                 result = {
                     "_ref": artifactRef,
                     "ObjectID": artifactObjectID,
                     "FormattedID": artifactFormattedID,
                     "Name": artifactName,
-                    "Attachments": attachments
+                    "Attachments": attachments,
+                    "AttachmentUsers": attachmentUsers
                 };
                 deferred.resolve(result);
             }
@@ -172,6 +176,18 @@ Ext.define('CustomApp', {
                             var attachmentName = attachment.get('Name');
                             attachmentsHtml.push('<a href="https://rally1.rallydev.com/slm/attachment/' + attachmentObjectID + "/" + attachmentName + '">' + attachmentName + '</a>');                        });
                         return attachmentsHtml.join('<br/> ');
+                    },
+                    flex: 1
+                },
+                {
+                    text: 'Attachment Owners', dataIndex: 'AttachmentUsers',
+                    renderer: function(values) {
+                        var usersHtml = [];
+                        Ext.Array.each(values, function(user) {
+                            var userName = user._refObjectName;
+                            usersHtml.push(userName);
+                        });
+                        return usersHtml.join('<br/>');
                     },
                     flex: 1
                 }
