@@ -67,11 +67,11 @@ Ext.define('CustomApp', {
                 scope: this,
                 load: this._artifactStoreLoaded
             },
-            filters: {
-                property: 'Attachments.ObjectID',
-                operator: '!=',
-                value: "null"
-            }
+            //filters: {
+            //    property: 'Attachments.ObjectID',
+            //    operator: '!=',
+            //    value: "null"
+            //}
         });
     },
 

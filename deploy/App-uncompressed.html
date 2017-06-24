@@ -3,7 +3,7 @@
 <head>
     <title>Rally Artifacts With Attachments</title>
 
-    <script type="text/javascript" src="https://rally1.rallydev.com/apps/2.0rc2/sdk.js"></script>
+    <script type="text/javascript" src="/apps/2.0rc2/sdk.js"></script>
 
     <script type="text/javascript">
         Rally.onReady(function () {
@@ -76,11 +76,11 @@
                 scope: this,
                 load: this._artifactStoreLoaded
             },
-            filters: {
-                property: 'Attachments.ObjectID',
-                operator: '!=',
-                value: "null"
-            }
+            //filters: {
+            //    property: 'Attachments.ObjectID',
+            //    operator: '!=',
+            //    value: "null"
+            //}
         });
     },
 
@@ -230,12 +230,14 @@
     </script>
 
 
+
     <style type="text/css">
         .app {
-     /* Add app styles here */
+  /* Add app styles here */
 }
 
     </style>
 </head>
-<body></body>
+<body>
+</body>
 </html>
