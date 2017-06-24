@@ -1,12 +1,12 @@
 {
-   "name": "Rally Artifacts With Attachments",
-   "className": "CustomApp",
-   "server": "https://rally1.rallydev.com",
-   "sdk": "2.0rc2",
-   "javascript": [
-      "App.js"
-   ],
-   "css": [
-      "app.css"
-   ]
+    "name": "Rally Artifacts With Attachments",
+    "className": "CustomApp",
+    "server": "https://rally1.rallydev.com",
+    "sdk": "2.0rc2",
+    "javascript": [
+        "App.js"
+    ],
+    "css": [
+        "app.css"
+    ]
 }
